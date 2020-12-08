@@ -1,16 +1,16 @@
 {
-  "name": "react-ts-init",
-  "version": "1.0.0",
+  "name": "react-library-init",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
     "start": "node dist/index.js",
-    "tsnode": "ts-node src/index.ts",
-    "watch": "tsc -p tsconfig.json -w",
-    "build": "webpack --mode production --env.production --progress",
-    "lint": "eslint src/*.ts*",
-    "lint:fix": "eslint src/*.ts* --fix",
-    "dev": "webpack-dev-server --mode development --env.development --open --hot --progress"
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest",
+    "prepare:del": "ls -a -I\".\" -I\"..\" | grep -vE \"dist|package.json|^.git$\" | xargs rm -r | rm dist/empty",
+    "prepare:make": "yarn build && yarn prepare:del",
+    "prepare:git": "git add . && git commit -m \"release\" && git push",
+    "prepare:run": "echo prepare && yarn prepare:make && yarn prepare:git"
   },
   "dependencies": {
     "@types/node": "^14.0.27",
